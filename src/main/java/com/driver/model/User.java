@@ -104,11 +104,12 @@ public class User {
         this.originalCountry = originalCountry;
     }
 
-    public List<ServiceProvider> getServiceProviders() {
+
+    public List<ServiceProvider> getServiceProviderList() {
         return serviceProviderList;
     }
 
-    public void setServiceProviders(List<ServiceProvider> serviceProviders) {
-        this.serviceProviderList = serviceProviders;
+    public void setServiceProviderList(List<ServiceProvider> serviceProviderList) {
+        this.serviceProviderList = serviceProviderList;
     }
 }
