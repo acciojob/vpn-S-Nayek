@@ -5,13 +5,14 @@ import com.driver.repository.AdminRepository;
 import com.driver.repository.CountryRepository;
 import com.driver.repository.ServiceProviderRepository;
 
+import com.driver.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class AdminServiceImpl  {
+public class AdminServiceImpl implements AdminService {
     @Autowired
     AdminRepository adminRepository1;
 
