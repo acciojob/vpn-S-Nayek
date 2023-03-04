@@ -9,7 +9,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String userName;
+    private String username;
     private String password;
     private String originalIp;
     private String maskedIp;
@@ -20,19 +20,19 @@ public class User {
     private List<Connection> connectionList;
 
     @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
-    private Country country;
+    private Country originalCountry;
 
     @ManyToMany
     @JoinColumn
-    private List<ServiceProvider> serviceProviders;
+    private List<ServiceProvider> serviceProviderList;
 
     public User() {
     }
 
     public User(String username, String password, Country originalCountry) {
-        this.userName = username;
+        this.username = username;
         this.password = password;
-        this.country = originalCountry;
+        this.originalCountry = originalCountry;
     }
 
     public int getId() {
@@ -53,11 +53,11 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getPassword() {
@@ -92,19 +92,23 @@ public class User {
         this.connectionList = connectionList;
     }
 
-    public Country getCountry() {
-        return country;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public Country getOriginalCountry() {
+        return originalCountry;
+    }
+
+    public void setOriginalCountry(Country originalCountry) {
+        this.originalCountry = originalCountry;
     }
 
     public List<ServiceProvider> getServiceProviders() {
-        return serviceProviders;
+        return serviceProviderList;
     }
 
     public void setServiceProviders(List<ServiceProvider> serviceProviders) {
-        this.serviceProviders = serviceProviders;
+        this.serviceProviderList = serviceProviders;
     }
 }

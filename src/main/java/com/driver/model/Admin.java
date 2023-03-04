@@ -10,8 +10,8 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String userName;
-    private String passWord;
+    private String username;
+    private String password;
 
     @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
      private List<ServiceProvider> serviceProviderList =new ArrayList<>();
@@ -19,11 +19,9 @@ public class Admin {
     public Admin() {
     }
 
-    public Admin(int id, String userName, String passWord, List<ServiceProvider> serviceProviderList) {
-        this.id = id;
-        this.userName = userName;
-        this.passWord = passWord;
-        this.serviceProviderList = serviceProviderList;
+    public Admin(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public int getId() {
@@ -34,20 +32,20 @@ public class Admin {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<ServiceProvider> getServiceProviderList() {

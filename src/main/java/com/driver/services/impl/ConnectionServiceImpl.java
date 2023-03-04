@@ -21,12 +21,13 @@ public class ConnectionServiceImpl implements ConnectionService {
     ConnectionRepository connectionRepository2;
 
 
+    @Override
     public User connect(int userId, String countryName) throws Exception{
         User user = userRepository2.findById(userId).get();
 
         if(user.getMaskedIp()!=null)
             throw new Exception("Already connected");
-        else if (countryName.equalsIgnoreCase(user.getCountry().getCountryName().toString())) {
+        else if (countryName.equalsIgnoreCase(user.getOriginalCountry().getCountryName().toString())) {
             return user;
         } else{
             if(user.getServiceProviders()==null){
@@ -75,6 +76,7 @@ public class ConnectionServiceImpl implements ConnectionService {
         }
     }
 
+    @Override
     public User disconnect(int userId) throws Exception {
         User user = userRepository2.findById(userId).get();
         if(user.getConnected()==false)
@@ -87,6 +89,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 
     }
 
+    @Override
     public User communicate(int senderId, int receiverId) throws Exception {
         User sender = userRepository2.findById(senderId).get();
         User receiver = userRepository2.findById(receiverId).get();
@@ -96,7 +99,7 @@ public class ConnectionServiceImpl implements ConnectionService {
 
             String code= Ip.substring(0,3);
 
-            if(code.equals(sender.getCountry().getCode()))
+            if(code.equals(sender.getOriginalCountry().getCode()))
                 return sender;
             else {
                 String countryName = "";
@@ -121,10 +124,10 @@ public class ConnectionServiceImpl implements ConnectionService {
                 }
             }
         }else{
-            if(receiver.getCountry().equals(sender.getCountry())){
+            if(receiver.getOriginalCountry().equals(sender.getOriginalCountry())){
                 return sender;
             }else{
-                String countryName = receiver.getCountry().getCountryName().toString();
+                String countryName = receiver.getOriginalCountry().getCountryName().toString();
 ;
                 try{
                     User updatedSender = connect(senderId,countryName);
